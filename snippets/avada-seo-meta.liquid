@@ -1,0 +1,31 @@
+{% if request.page_type == 'product' %}
+{%- unless avada_seo_ovr_product_ids contains product.id -%}
+{%- capture avada_seo_meta_title -%}Köp {{ product.title }} fraktfritt Online hos Svedberga.com{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}Beställ {{ product.title }} med fri frakt hos Svedberga Plantskola AB. På Svedberga.com hittar du alltid bra erbjudande på {{ product.type }}. Läs omdömen och beställ  {{ product.title }} säkert idag.{%- endcapture -%}
+{% endunless %}
+{% endif %}
+
+{% if request.page_type == 'collection' %}
+{%- unless avada_seo_ovr_collection_ids contains collection.id -%}
+{%- capture avada_seo_meta_title -%}Köp {{ collection.title }} med fri frakt och säker leverans, Svedberga.com{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}Beställ {{ collection.title }} av {{ shop.name }}. Beställ Online med hemleverans. ✓ Gratis frakt ✓ Säker betalning ✓ Delbetalning ✓  Garanti✓ {%- endcapture -%}
+{% endunless %}
+{% endif %}
+
+{% if request.page_type == 'article' %}
+{%- unless avada_seo_ovr_article_ids contains article.id -%}
+{%- capture avada_seo_meta_title -%}{{ article.title }}{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}{{ article.excerpt_or_content }}{%- endcapture -%}
+{% endunless %}
+{% endif %}
+
+{% if avada_seo_meta_title %}
+{%- assign seo_title = avada_seo_meta_title | strip_html | strip -%}
+{%- assign page_title = seo_title -%}
+{%- assign og_title = seo_title -%}
+{% endif %}
+
+{% if avada_seo_meta_description %}
+{%- assign page_description = avada_seo_meta_description | strip_html | strip -%}
+{%- assign og_description = page_description -%}
+{% endif %}
